@@ -25,13 +25,21 @@ Please find the solutions for all the parts (namely Part I ,Part II and Part III
      ```sh
      docker run -d -p 9393:9300 -e CSVSERVER_BORDER=Orange infracloudio/csvserver:add-input-file /csvserver/csvserver
      ```
+
 After following all the above mentioned steps ,we could see that application is accessible at http://localhost:9393, with 10 entries from `inputFile` and the welcome note with an orange color border.
 
 ## Part II
   0. The objective of this Part is to run application with docker-compose.Make sure to delete the running containers.
-  1. Refer the `docker-compose.yaml` in the repo directory `Solution/docker-compose.yaml` for running application(with the same setup done in Part I) with docker-compose.
-  2. After creating the docker-compose.yaml ,run the file to bring up the application.
+  1. Please refer the `docker-compose.yaml` in the repo directory `Solution/docker-compose.yaml` for running application(with the same setup done in Part I) with docker-compose.
+  2. After creating the docker-compose.yaml , run the file to bring up the application.
   > **NOTE**:Make sure to run the docker-compose with detached mode by using argument -d.
     ```sh
     docker-compose up -d
      ```
+
+## Part III
+   0. In this Part , we need to add a prometheus conatainer as part of docker-compose and run docker-compose to start application and prometheus container. Once both the containers are started , we need to scrape the metrics from applcation.On going further we need to stop the running containers.
+   1. Add the prometheus container to docker-compose.yaml file , refer repo directory `solution/docker-compose.yaml`.
+   2. To configure prometheus to collect data from application endpoint (localhost:9393/metrics) , we need to create a file called `prometheus.yml` for configuring the scraping.Once the file is created , we need to mount this file to volume directory like this `/root/csvserver/solution:/etc/prometheus` in docker-compose.yaml under volumes section in prmetheus container.Refer `solution/docker-compose.yaml`.
+   3. Now bring up the docker-compose by using the command `docker-compose up -d`.
+   4. After executing these steps , we could see that prometheus running on port 9090 and on typing `csvserver_records` in query box of Prometheus , it will show a straight line graph with value 10
