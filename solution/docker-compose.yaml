@@ -1,0 +1,9 @@
+version: '3.9'
+services:
+  csvserver:
+    image: infracloudio/csvserver:add-input-file
+    environment:
+      CSVSERVER_BORDER: Orange
+    command: /csvserver/csvserver
+    ports:
+      - "9393:9300"

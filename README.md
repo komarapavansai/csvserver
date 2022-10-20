@@ -26,3 +26,12 @@ Please find the solutions for all the parts (namely Part I ,Part II and Part III
      docker run -d -p 9393:9300 -e CSVSERVER_BORDER=Orange infracloudio/csvserver:add-input-file /csvserver/csvserver
      ```
 After following all the above mentioned steps ,we could see that application is accessible at http://localhost:9393, with 10 entries from `inputFile` and the welcome note with an orange color border.
+
+## Part II
+  0. The objective of this Part is to run application with docker-compose.Make sure to delete the running containers.
+  1. Refer the `docker-compose.yaml` in the repo directory `Solution/docker-compose.yaml` for running application(with the same setup done in Part I) with docker-compose.
+  2. After creating the docker-compose.yaml ,run the file to bring up the application.
+  > **NOTE**:Make sure to run the docker-compose with detached mode by using argument -d.
+    ```sh
+    docker-compose up -d
+     ```
