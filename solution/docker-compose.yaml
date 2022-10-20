@@ -1,4 +1,5 @@
 version: '3.9'
+
 services:
   csvserver:
     image: infracloudio/csvserver:add-input-file
@@ -6,4 +7,13 @@ services:
       CSVSERVER_BORDER: Orange
     command: /csvserver/csvserver
     ports:
-      - "9393:9300"
+      - "9393:9300"  
+  prometheus:
+    depends_on:
+      - csvserver
+    image: prom/prometheus:v2.22.0
+    network_mode: "host"
+    ports:
+      - "9090:9090"
+    volumes:
+      - /root/csvserver/solution:/etc/prometheus
